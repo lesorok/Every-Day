@@ -1,0 +1,35 @@
+<mat-card class="example-card">
+  <form [formGroup]="newPostForm" (ngSubmit)="addNewItem()">
+    <h1>Добавить пост</h1>
+    <label>Описание</label>
+    <input formControlName="title" id="title" type="text" />
+    <br />
+    <!--    <label>Изображение</label>-->
+    <!--    <input formControlName="file" id="file" type="file" />-->
+    <!--    <br />-->
+    <label>Категория</label>
+    <select formControlName="category">
+      <option
+        *ngFor="let category of categories; let i = index"
+        value="{{ category.value }}"
+      >
+        {{ category.name }}
+      </option>
+    </select>
+    <br />
+    <label>Теги</label>
+    <div *ngFor="let tagControl of tags.controls; let id = index">
+      <input
+        [formControl]="$any(tagControl).controls.name"
+        type="text"
+        style="width: 100px; margin-bottom: 5px"
+      />
+      <button *ngIf="tags.controls" type="button" (click)="deleteTagInput(id)">
+        X
+      </button>
+    </div>
+    <button type="button" (click)="addNewTag()">+</button>
+    <br />
+    <button type="submit">Добавить</button>
+  </form>
+</mat-card>

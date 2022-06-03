@@ -1,33 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IPost } from '../../../../shared/interface/post';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsComponent implements OnInit {
-  posts = [
-    {
-      title: '1 Пост',
-      content: 'Проверка 1',
-      countLike: 0,
-    },
-    {
-      title: '2 Пост',
-      content: 'Проверка 2',
-      countLike: 0,
-    },
-    {
-      title: '3 Пост',
-      content: 'Проверка 3',
-      countLike: 0,
-    },
-  ];
+  private postsStream$ = new BehaviorSubject<IPost[]>([]);
+  posts$ = this.postsStream$.asObservable();
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  like(): void {
-    console.log(this.posts);
+  ngOnInit(): void {
+    this.loadPosts().subscribe();
   }
-  ngOnInit(): void {}
+
+  loadPosts() {
+    return this.httpClient
+      .get<IPost[]>('http://localhost:3000/posts')
+      .pipe(tap(posts => this.postsStream$.next(posts)));
+  }
+
+  addItem(newPost: IPost) {
+    console.log(newPost);
+    return this.httpClient
+      .post<IPost>('http://localhost:3000/posts/create', newPost)
+      .pipe(switchMap(() => this.loadPosts()))
+      .subscribe();
+  }
+
+  deletePost(id: number) {
+    if (confirm('Действительно удалить пост?')) {
+      return this.httpClient
+        .delete<IPost>(`http://localhost:3000/posts/${id}`)
+        .pipe(switchMap(() => this.loadPosts()))
+        .subscribe();
+    }
+    return;
+  }
 }

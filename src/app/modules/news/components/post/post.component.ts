@@ -1,13 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { IPost } from '../../../../shared/interface/post';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
-  @Input() post: any;
+  @Input() post: IPost | any;
+  @Output() deletePostEvent = new EventEmitter<number>();
+
   constructor() {}
-  like(): void {}
+
   ngOnInit(): void {}
+
+  deletePost(id: number) {
+    this.deletePostEvent.emit(id);
+  }
 }
