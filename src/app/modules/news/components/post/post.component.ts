@@ -17,12 +17,19 @@ import { IPost } from '../../../../shared/interface/post';
 export class PostComponent implements OnInit {
   @Input() post: IPost | any;
   @Output() deletePostEvent = new EventEmitter<number>();
-
+  @Output() likePostEvent = new EventEmitter<IPost>();
   constructor() {}
 
   ngOnInit(): void {}
 
-  deletePost(id: number) {
-    this.deletePostEvent.emit(id);
+  deletePost() {
+    this.deletePostEvent.emit(this.post.id);
+  }
+
+  likePost() {
+    //здесь надо добавить проверку на пользователя, а пока можно лайкать до бесконечности :Т
+    let updatePost = this.post;
+    updatePost.countLike = this.post.countLike + 1;
+    this.likePostEvent.emit(updatePost);
   }
 }

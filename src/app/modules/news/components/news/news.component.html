@@ -1,4 +1,8 @@
 <app-add-post (newItemEvent)="addItem($event)"> </app-add-post>
 <div *ngFor="let post of posts$ | async">
-  <app-post (deletePostEvent)="deletePost($event)" [post]="post"></app-post>
+  <app-post
+    (deletePostEvent)="deletePost($event)"
+    (likePostEvent)="likePost($event)"
+    [post]="post"
+  ></app-post>
 </div>

@@ -1,5 +1,5 @@
 <div class="mb" *ngIf="post">
-  <button type="button" (click)="deletePost(post.id)">Удалить</button>
+  <button type="button" (click)="deletePost()">Удалить</button>
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
@@ -20,7 +20,7 @@
       </mat-chip-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>
+      <button mat-button (click)="likePost()">
         <mat-icon>favorite</mat-icon>
         {{ post.countLike }}
       </button>

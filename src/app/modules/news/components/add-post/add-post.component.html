@@ -9,22 +9,23 @@
     <!--    <br />-->
     <label>Категория</label>
     <select formControlName="category">
-      <option
-        *ngFor="let category of categories; let i = index"
-        value="{{ category.value }}"
-      >
+      <option *ngFor="let category of categories" value="{{ category.value }}">
         {{ category.name }}
       </option>
     </select>
     <br />
     <label>Теги</label>
-    <div *ngFor="let tagControl of tags.controls; let id = index">
+    <div *ngFor="let tagControl of tags.controls; index as index">
       <input
         [formControl]="$any(tagControl).controls.name"
         type="text"
         style="width: 100px; margin-bottom: 5px"
       />
-      <button *ngIf="tags.controls" type="button" (click)="deleteTagInput(id)">
+      <button
+        *ngIf="tags.controls"
+        type="button"
+        (click)="deleteTagInput(index)"
+      >
         X
       </button>
     </div>

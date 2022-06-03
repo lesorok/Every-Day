@@ -26,7 +26,6 @@ export class NewsComponent implements OnInit {
   }
 
   addItem(newPost: IPost) {
-    console.log(newPost);
     return this.httpClient
       .post<IPost>('http://localhost:3000/posts/create', newPost)
       .pipe(switchMap(() => this.loadPosts()))
@@ -41,5 +40,11 @@ export class NewsComponent implements OnInit {
         .subscribe();
     }
     return;
+  }
+
+  likePost(updatePost: IPost) {
+    return this.httpClient
+      .put<IPost>(`http://localhost:3000/posts/${updatePost.id}`, updatePost)
+      .subscribe();
   }
 }

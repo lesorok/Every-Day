@@ -70,7 +70,7 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  deleteTagInput(id: number) {
-    return this.tags.removeAt(id);
+  deleteTagInput(index: number) {
+    return this.tags.removeAt(index);
   }
 }
