@@ -13,21 +13,42 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewsComponent } from './components/news/news.component';
 import { PostComponent } from './components/post/post.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { CommentsComponent } from './components/post/comments/comments.component';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { PostsService } from './service/posts.service';
+import { NewsPageComponent } from './components/news-page/news-page.component';
+import { CategoriesModule } from '../categories/categories.module';
+import { FilterCategoriesPipe } from './components/pipes/filter-categories.pipe';
 
 @NgModule({
-  declarations: [NewsComponent, PostComponent, AddPostComponent],
+  declarations: [
+    NewsComponent,
+    PostComponent,
+    AddPostComponent,
+    CommentsComponent,
+    NewsPageComponent,
+    FilterCategoriesPipe,
+  ],
   imports: [
     CommonModule,
     NewsRoutingModule,
+    CategoriesModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
     MatChipsModule,
     MatIconModule,
-    MatInputModule,
     MatSelectModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MatListModule,
+    MatInputModule,
+    MatMenuModule,
+    MatExpansionModule,
   ],
+  exports: [PostComponent],
+  providers: [PostsService],
 })
 export class NewsModule {}

@@ -1,7 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { BehaviorSubject, filter, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IPost } from '../../../../shared/interface/post';
+import { IPost, IPostForm } from '../../../../shared/interface/post';
 
 @Component({
   selector: 'app-news',
@@ -11,7 +18,10 @@ import { IPost } from '../../../../shared/interface/post';
 })
 export class NewsComponent implements OnInit {
   private postsStream$ = new BehaviorSubject<IPost[]>([]);
-  posts$ = this.postsStream$.asObservable();
+  public posts$ = this.postsStream$.asObservable();
+  public sortCategory: string = '';
+  public file: any;
+  // public imageUrl: string = '';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -25,9 +35,14 @@ export class NewsComponent implements OnInit {
       .pipe(tap(posts => this.postsStream$.next(posts)));
   }
 
-  addItem(newPost: IPost) {
+  addItem(newPost: IPostForm) {
+    console.log(newPost);
     return this.httpClient
-      .post<IPost>('http://localhost:3000/posts/create', newPost)
+      .post<IPost>('http://localhost:3000/posts/create', {
+        ...newPost,
+        file: this.file,
+        // imageUrl: this.imageUrl.toString(),
+      })
       .pipe(switchMap(() => this.loadPosts()))
       .subscribe();
   }
@@ -46,5 +61,23 @@ export class NewsComponent implements OnInit {
     return this.httpClient
       .put<IPost>(`http://localhost:3000/posts/${updatePost.id}`, updatePost)
       .subscribe();
+  }
+
+  sortOnCategory(category: string) {
+    if (this.sortCategory !== category) {
+      this.sortCategory = category;
+      console.log(this.sortCategory);
+    }
+  }
+
+  removeFilter() {
+    this.sortCategory = '';
+  }
+
+  uploadFile(file: File) {
+    // const formData = new FormData();
+    // formData.append('image', file);
+    // this.file = formData;
+    // console.log(this.file);
   }
 }

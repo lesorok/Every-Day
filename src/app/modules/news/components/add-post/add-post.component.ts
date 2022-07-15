@@ -14,7 +14,9 @@ import {
 } from '@angular/forms';
 
 import { ICategory } from '../../../../shared/interface/category';
-import { IPost } from '../../../../shared/interface/post';
+import { IPost, IPostForm } from '../../../../shared/interface/post';
+import { BehaviorSubject, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-post',
@@ -23,41 +25,52 @@ import { IPost } from '../../../../shared/interface/post';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPostComponent implements OnInit {
-  public categories: ICategory[] = [
-    {
-      value: 'oil-0',
-      name: 'Масло',
-      description: 'Картины нарисованные маслом',
-    },
-    {
-      value: 'graphic-1',
-      name: 'Графика',
-      description: 'Графические работы',
-    },
-  ];
-  @Output() newItemEvent = new EventEmitter<IPost>();
+  private categoriesStream$ = new BehaviorSubject<ICategory[]>([]);
+  public categories$ = this.categoriesStream$.asObservable();
 
+  @Output() newItemEvent = new EventEmitter<IPostForm>();
+  @Output() uploadImageEvent = new EventEmitter<File>();
   newPostForm!: FormGroup;
   tags!: FormArray;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
+    this.loadCategory().subscribe();
     this.newPostForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
-      author: new FormControl('', [Validators.required]),
-      img: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      countLike: new FormControl(0, [Validators.required]),
     });
     this.tags = new FormArray([this.getNewTagGroup()]);
+  }
+
+  loadCategory() {
+    return this.httpClient
+      .get<ICategory[]>('http://localhost:3000/categories')
+      .pipe(tap(categories => this.categoriesStream$.next(categories)));
   }
 
   addNewItem() {
     this.newItemEvent.emit({
       ...this.newPostForm.value,
       tags: this.tags.value,
+      author: 'test',
+      countLike: 0,
     });
+    this.newPostForm.reset();
+    this.tags.reset();
+  }
+
+  uploadImage(event: any) {
+    if (event.target.files && event.target.files.length) {
+      const files = event.target.files;
+      let file;
+      for (let i = 0; i < files.length; i++) {
+        file = files.item(i);
+        file = files[i];
+      }
+      this.uploadImageEvent.emit(file);
+    }
   }
 
   addNewTag() {
