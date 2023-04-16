@@ -1,0 +1,51 @@
+<div class="habit-tracker">
+  <h2>Habit Tracker</h2>
+  <div class="habits">
+    <div class="habit" *ngFor="let habit of habits">
+      <h3></h3>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="7">{{ habit.name }}</th>
+          </tr>
+          <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of days | chunk: 7">
+            <ng-container *ngFor="let day of week">
+              <td>
+                {{ day }}
+                <input
+                  type="checkbox"
+                  [checked]="habit.dates.includes(day)"
+                  (change)="toggleDate(habit, day)"
+                />
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="new-habit">
+  <h3>New Habit</h3>
+  <form (submit)="createNewHabit()">
+    <input
+      type="text"
+      [(ngModel)]="newHabitName"
+      name="newHabitName"
+      placeholder="Habit name"
+    />
+    <button type="submit">Create</button>
+  </form>
+</div>

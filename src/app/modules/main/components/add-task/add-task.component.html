@@ -1,0 +1,28 @@
+<div class="container">
+  <form [formGroup]="newTaskForm" (ngSubmit)="addNewItem()">
+    <input
+      formControlName="title"
+      class="input col-8"
+      placeholder="Новая задача..."
+      required
+    />
+    <input
+      type="date"
+      [value]="newTaskForm.controls['date'].value | date: 'dd.MM.yyyy'"
+      readonly
+    />
+
+    <select formControlName="category" class="select col-4" required>
+      <option class="option" value="Тип задачи..." selected>
+        Тип задачи...
+      </option>
+      <ng-container *ngFor="let category of categories$ | async">
+        <option value="{{ category.name }}">{{ category.name }}</option>
+      </ng-container>
+    </select>
+
+    <button class="button" type="submit" [disabled]="newTaskForm.invalid">
+      Добавить
+    </button>
+  </form>
+</div>

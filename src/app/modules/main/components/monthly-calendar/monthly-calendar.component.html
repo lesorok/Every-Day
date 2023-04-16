@@ -1,0 +1,26 @@
+<div class="calendar">
+  <div class="header">
+    <button (click)="previousMonth()">&lt;</button>
+    <h2>{{ currentMonth | date: 'MMMM y' }}</h2>
+    <button (click)="nextMonth()">&gt;</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let day of weekdays">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of weeks">
+        <td *ngFor="let day of week" (click)="addTask(day)">
+          <div class="day">
+            {{ day.getDate() }}
+            <ul>
+              <li *ngFor="let task of tasks[day.toDateString()]">{{ task }}</li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,52 @@
+a {
+  text-decoration: none;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.header {
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  box-shadow: 0px 6px 10px 4px rgba(157, 156, 156, 0.5);
+}
+
+.logo {
+  position: absolute;
+  width: 114.44px;
+  height: 58.29px;
+  left: 45.69px;
+  top: 10px;
+
+  font-family: 'K2D', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 52px;
+
+  color: #55305b;
+}
+
+.link {
+  width: 133.71px;
+  height: 20.57px;
+  font-family: 'Arial', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #3d3c3b;
+}
+
+.icon {
+  width: 53px;
+  height: 53px;
+}
+
+.mat-icon {
+  width: 53px;
+  font-size: 53px;
+  color: #ffbfc5;
+}

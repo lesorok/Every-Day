@@ -3,18 +3,39 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'categories',
+    path: '',
     loadChildren: () =>
-      import('./modules/categories/categories.module').then(
-        m => m.CategoriesModule,
+      import('./modules/main/main.module').then(m => m.MainModule),
+  },
+  {
+    path: 'dairy-plan',
+    loadChildren: () =>
+      import('./modules/dairy-plan/dairy-plan.module').then(
+        m => m.DairyPlanModule,
       ),
   },
   {
-    path: 'news',
+    path: 'weekly-plan',
     loadChildren: () =>
-      import('./modules/news/news.module').then(m => m.NewsModule),
+      import('./modules/weekly-plan/weekly-plan.module').then(
+        m => m.WeeklyPlanModule,
+      ),
   },
-  { path: '', pathMatch: 'full', redirectTo: 'news' },
+  {
+    path: 'monthly-plan',
+    loadChildren: () =>
+      import('./modules/monthly-plan/monthly-plan.module').then(
+        m => m.MonthlyPlanModule,
+      ),
+  },
+  {
+    path: 'yearly-plan',
+    loadChildren: () =>
+      import('./modules/yearly-plan/yearly-plan.module').then(
+        m => m.YearlyPlanModule,
+      ),
+  },
+  { path: '', pathMatch: 'full', redirectTo: '' },
 ];
 
 @NgModule({

@@ -1,0 +1,43 @@
+button {
+  border: none;
+  outline: none;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 10px;
+  gap: 5px;
+  width: 365px;
+  height: 25px;
+  background: rgba(53, 53, 53, 0.45);
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.task {
+  width: 164px;
+  height: 19px;
+  font-family: 'ABeeZee', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  /* Текст на кнопках */
+  color: #fcfaf2;
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.check {
+  top: 23%;
+  bottom: 23%;
+}

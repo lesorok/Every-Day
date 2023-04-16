@@ -1,0 +1,33 @@
+<app-add-task (newItemEvent)="addItem($event)"> </app-add-task>
+
+<!--<div class="container">-->
+<!--  <div class="row justify-content-md-center">-->
+<!--    <button-->
+<!--      *ngIf="sortCategory"-->
+<!--      mat-raised-button-->
+<!--      type="button"-->
+<!--      (click)="removeFilter()"-->
+<!--      class="col-4 p-1"-->
+<!--    >-->
+<!--      Убрать фильтрацию по категории "{{ sortCategory }}"-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container">
+  <h1 class="title">Список дел</h1>
+  <div class="todo">
+    <ng-container *ngIf="tasks$ | async; let allTasks">
+      <ng-container
+        *ngFor="let task of allTasks | filterCategories: sortCategory"
+      >
+        <app-task
+          (deleteTaskEvent)="deleteTask($event)"
+          (checkTaskEvent)="checkTask($event)"
+          (sortCategoryEvent)="sortOnCategory($event)"
+          [task]="task"
+        ></app-task>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
