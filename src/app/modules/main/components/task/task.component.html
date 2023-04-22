@@ -1,42 +1,29 @@
-<!--<mat-card class="m-4">-->
-<!--  <button mat-icon-button [matMenuTriggerFor]="menu" type="button">-->
-<!--    <mat-icon>more_vert</mat-icon>-->
-<!--  </button>-->
-<!--  <mat-menu #menu="matMenu">-->
-<!--    <button mat-menu-item (click)="deleteTask()">-->
-<!--      <mat-icon>cancel</mat-icon>-->
-<!--      <span>Удалить</span>-->
-<!--    </button>-->
-<!--  </mat-menu>-->
-<!--  <mat-card-header>-->
-<!--    <div mat-card-avatar class="example-header-image"></div>-->
-<!--    <mat-card-title>{{ task.title }}</mat-card-title>-->
-<!--  </mat-card-header>-->
-<!--</mat-card>-->
-<!--<mat-card-content>-->
-<!--  <mat-chip-list aria-label="Fish selection">-->
-<!--    <mat-chip selected (click)="sortCategory()"-->
-<!--    >{{ task.category }}-->
-<!--    </mat-chip>-->
-<!--  </mat-chip-list>-->
-<!--</mat-card-content>-->
-<div class="container">
-  <div class="check">
-    <ng-container *ngIf="task.check">
-      <button mat-menu-item (click)="checkTask()">
-        <mat-icon>check_box</mat-icon>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="!task.check">
-      <button mat-menu-item (click)="checkTask()">
-        <mat-icon>check_box_outline_blank</mat-icon>
-      </button>
-    </ng-container>
+<div class="container-task">
+  <mat-icon class="check" *ngIf="task.check" (click)="checkTask()"
+    >check_box</mat-icon
+  >
+  <mat-icon class="check" *ngIf="!task.check" (click)="checkTask()"
+    >check_box_outline_blank</mat-icon
+  >
+  <div class="task">{{ task.title }}</div>
+  <div class="button-check">
+    <mat-icon *ngIf="task.urgency" class="star-check" (click)="changeUrgency()"
+      >error</mat-icon
+    >
+    <mat-icon *ngIf="!task.urgency" (click)="changeUrgency()" class="star"
+      >error_outline</mat-icon
+    >
+    <mat-icon
+      *ngIf="task.category === 'Простая'"
+      class="star"
+      (click)="changeCategory()"
+      >star_border</mat-icon
+    >
+    <mat-icon
+      *ngIf="task.category === 'Важная'"
+      (click)="changeCategory()"
+      class="star-check"
+      >star</mat-icon
+    >
   </div>
-  <div class="task">
-    {{ task.title }}
-  </div>
-  <!--  <button mat-menu-item (click)="deleteTask()">-->
-  <!--    <mat-icon>cancel</mat-icon>-->
-  <!--  </button>-->
 </div>

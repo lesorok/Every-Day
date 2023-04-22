@@ -1,48 +1,91 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 31px 30px 0px;
-  gap: 30px;
-  position: relative;
-  width: 429px;
-  height: 338px;
+  justify-content: center;
+  padding: 30px;
+  width: 425px;
+  left: 44px;
+  top: 128px;
   background: #b6bfd8;
   border-radius: 20px;
+  max-height: 722px;
 }
 
 .todo {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 2px 10px 0px;
   gap: 10px;
-  width: 367px;
-  height: 137px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  width: 322px;
+  min-height: 150px;
+  color: #fcfaf2;
 }
 
 .title {
-  width: 385px;
-  height: 47px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 9px;
 
-  font-family: 'Abhaya Libre ExtraBold', serif;
+  width: 365px;
+  height: 47px;
+  font-family: 'K2D', sans-serif;
   font-style: normal;
   font-weight: 800;
   font-size: 40px;
   line-height: 47px;
-  display: flex;
-  align-items: center;
-
-  /* Текст на кнопках */
 
   color: #fcfaf2;
+}
 
-  /* Inside auto layout */
+.input-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 2px 10px 0px;
+  gap: 10px;
+  width: 351px;
+  height: 25px;
+  background: rgba(53, 53, 53, 0.45);
+  border-radius: 10px;
+  border: none;
+}
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+::placeholder {
+  padding-left: 10px;
+  font-family: 'ABeeZee', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #fcfaf2;
+  opacity: 0.5;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 139px;
+  width: 365px;
+  height: 40px;
+  color: #fcfaf2;
+}
+
+.buttons-2 {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 193px;
 }

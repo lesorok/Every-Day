@@ -1,22 +1,16 @@
-<app-add-task (newItemEvent)="addItem($event)"> </app-add-task>
-
-<!--<div class="container">-->
-<!--  <div class="row justify-content-md-center">-->
-<!--    <button-->
-<!--      *ngIf="sortCategory"-->
-<!--      mat-raised-button-->
-<!--      type="button"-->
-<!--      (click)="removeFilter()"-->
-<!--      class="col-4 p-1"-->
-<!--    >-->
-<!--      Убрать фильтрацию по категории "{{ sortCategory }}"-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div class="container">
   <h1 class="title">Список дел</h1>
+  <h1 *ngIg="day" class="title">{{ day }}</h1>
   <div class="todo">
+    <form [formGroup]="newTaskForm" (ngSubmit)="newDayTask()">
+      <input
+        *ngIf="!haveTask"
+        formControlName="title"
+        class="input-task"
+        type="text"
+        placeholder="Добавить..."
+      />
+    </form>
     <ng-container *ngIf="tasks$ | async; let allTasks">
       <ng-container
         *ngFor="let task of allTasks | filterCategories: sortCategory"
@@ -29,5 +23,20 @@
         ></app-task>
       </ng-container>
     </ng-container>
+    <div class="buttons">
+      <mat-icon>arrow_back</mat-icon>
+      <div class="buttons-2">
+        <mat-icon class="rad">edit</mat-icon>
+        <mat-icon *ngIf="sortCategory" (click)="removeFilter()"
+          >star_border</mat-icon
+        >
+        <mat-icon *ngIf="!sortCategory" (click)="sortOnCategory('Важная')"
+          >star</mat-icon
+        >
+        <mat-icon (click)="deleteAllTask(idCheckTask)">delete</mat-icon>
+        <mat-icon (click)="addNewTask()">add</mat-icon>
+        <mat-icon>arrow_forward</mat-icon>
+      </div>
+    </div>
   </div>
 </div>

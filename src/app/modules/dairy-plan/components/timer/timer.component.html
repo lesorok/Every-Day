@@ -1,0 +1,17 @@
+<div>
+  <h1 class="timer-title">Таймер</h1>
+  <app-add-time-task></app-add-time-task>
+  <div class="timer">
+    <app-time [minutes]="minutes" [seconds]="seconds"></app-time>
+    <button (click)="startTimer()" *ngIf="!timerStarted">Start</button>
+    <button (click)="stopTimer()" *ngIf="timerStarted">Stop</button>
+    <button (click)="clearTimer()" *ngIf="timerStarted">Сlear</button>
+  </div>
+
+  <div class="count-pomodos">
+    <mat-icon>watch_later</mat-icon>
+    <mat-icon>watch_later</mat-icon>
+    <mat-icon>watch_later</mat-icon>
+    <mat-icon>watch_later</mat-icon>
+  </div>
+</div>

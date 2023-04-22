@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-habit-tracer',
   templateUrl: './habit-tracer.component.html',
   styleUrls: ['./habit-tracer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitTracerComponent implements OnInit {
   habits: { name: string; dates: Date[] }[] = [];

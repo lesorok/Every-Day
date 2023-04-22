@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { TaskService } from '../../../../shared/services/task.service';
 
 @Component({
   selector: 'app-monthly-calendar',
   templateUrl: './monthly-calendar.component.html',
   styleUrls: ['./monthly-calendar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TaskService],
 })
 export class MonthlyCalendarComponent implements OnInit {
-  weekdays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  currentMonth: Date = new Date();
-  weeks: Date[][] = [];
-  tasks: { [key: string]: string[] } = {};
+  public tasks$ = this.taskService.tasks$;
+  public sortCategory: string = 'Важная';
+  public weekdays: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+  public currentMonth: Date = new Date();
+  public weeks: Date[][] = [];
+  // tasks: { [key: string]: string[] } = {};
 
-  constructor() {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     this.generateCalendar();
+    this.taskService.loadTasks().subscribe();
+    console.log(this.tasks$);
   }
 
   generateCalendar(): void {
@@ -69,13 +76,13 @@ export class MonthlyCalendarComponent implements OnInit {
   }
 
   addTask(day: Date) {
-    const taskName = prompt('Enter task name');
-    if (taskName) {
-      const dateString = day.toDateString();
-      if (!this.tasks[dateString]) {
-        this.tasks[dateString] = [];
-      }
-      this.tasks[dateString].push(taskName);
-    }
+    // const taskName = prompt('Enter task name');
+    // if (taskName) {
+    //   const dateString = day.toDateString();
+    //   if (!this.tasks[dateString]) {
+    //     this.tasks[dateString] = [];
+    //   }
+    //   this.tasks[dateString].push(taskName);
+    // }
   }
 }

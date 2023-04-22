@@ -1,0 +1,14 @@
+<form [formGroup]="newTaskForm" (ngSubmit)="addTime()" class="task-time">
+  <select
+    formControlName="id"
+    class="task-time-input"
+    (ngModelChange)="addTime()"
+  >
+    <option>Задача на время...</option>
+    <ng-container *ngIf="tasks$ | async; let allTasks">
+      <ng-container *ngFor="let task of allTasks">
+        <option value="{{ task.id }}">{{ task.title }}</option>
+      </ng-container>
+    </ng-container>
+  </select>
+</form>

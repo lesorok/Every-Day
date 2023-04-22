@@ -38,4 +38,16 @@ export class TaskComponent implements OnInit {
     updateTask.check = !this.task.check;
     this.checkTaskEvent.emit(updateTask);
   }
+
+  changeCategory() {
+    let updateTask = this.task;
+    updateTask.category =
+      updateTask.category === 'Важная' ? 'Простая' : 'Важная';
+    this.checkTaskEvent.emit(updateTask);
+  }
+  changeUrgency() {
+    let updateTask = this.task;
+    updateTask.urgency = updateTask.urgency !== true;
+    this.checkTaskEvent.emit(updateTask);
+  }
 }

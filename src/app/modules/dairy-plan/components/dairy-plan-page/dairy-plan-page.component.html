@@ -1,1 +1,22 @@
-<app-todo-list></app-todo-list>
+<app-todo-list class="container"></app-todo-list>
+<div class="container-right">
+  <div class="background">
+    <app-timer></app-timer>
+    <app-date-now></app-date-now>
+    <app-weather-report></app-weather-report>
+    <form
+      class="main-task-day"
+      (ngSubmit)="addMainTask()"
+      [formGroup]="newMainTaskForm"
+    >
+      <h1 class="title-main-task">Главная задача на день</h1>
+      <div *ngIf="!mainTask" class="input-main-task">
+        <mat-icon class="add">add</mat-icon>
+        <input class="input-main" type="text" placeholder="Добавить..." />
+      </div>
+      <div *ngIf="mainTask" class="input-main-task">
+        <app-task [task]="mainTask"></app-task>
+      </div>
+    </form>
+  </div>
+</div>

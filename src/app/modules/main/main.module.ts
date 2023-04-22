@@ -24,6 +24,8 @@ import { ChunkPipe } from './components/pipes/chunk.pipe';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryComponent } from './components/category/category.component';
 import { MatRippleModule } from '@angular/material/core';
+import { TaskDateFilterPipe } from './components/pipes/task-date-filter.pipe';
+import { TimerFormatPipe } from './components/pipes/timer-format.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { MatRippleModule } from '@angular/material/core';
     MonthlyCalendarComponent,
     HabitTracerComponent,
     ChunkPipe,
+    TaskDateFilterPipe,
+    TimerFormatPipe,
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,14 @@ import { MatRippleModule } from '@angular/material/core';
     MatDatepickerModule,
     MatRippleModule,
   ],
-  exports: [TaskComponent, AddTaskComponent, FilterCategoriesPipe],
+  exports: [
+    TaskComponent,
+    AddTaskComponent,
+    FilterCategoriesPipe,
+    MonthlyCalendarComponent,
+    HabitTracerComponent,
+    TaskDateFilterPipe,
+  ],
   providers: [],
 })
 export class MainModule {}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MounthlyPlanPageComponent } from './mounthly-plan-page/mounthly-plan-page.component';
+import { MounthlyPlanPageComponent } from './components/mounthly-plan-page/mounthly-plan-page.component';
 
 const routes: Routes = [
   {
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WeeklyPlanRoutingModule {}
+export class MounthlyPlanRoutingModule {}

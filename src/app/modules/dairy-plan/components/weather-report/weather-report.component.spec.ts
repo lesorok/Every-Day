@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MounthlyPlanPageComponent } from './mounthly-plan-page.component';
+import { WeatherReportComponent } from './weather-report.component';
 
-describe('MounthlyPlanPageComponent', () => {
-  let component: MounthlyPlanPageComponent;
-  let fixture: ComponentFixture<MounthlyPlanPageComponent>;
+describe('WeatherReportComponent', () => {
+  let component: WeatherReportComponent;
+  let fixture: ComponentFixture<WeatherReportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MounthlyPlanPageComponent ]
+      declarations: [ WeatherReportComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MounthlyPlanPageComponent);
+    fixture = TestBed.createComponent(WeatherReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

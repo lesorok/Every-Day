@@ -1,8 +1,15 @@
 <div class="calendar">
   <div class="header">
-    <button (click)="previousMonth()">&lt;</button>
-    <h2>{{ currentMonth | date: 'MMMM y' }}</h2>
-    <button (click)="nextMonth()">&gt;</button>
+    <h2 class="month">{{ currentMonth | date: 'MMMM' }}</h2>
+    <h2 class="year">{{ currentMonth | date: 'y' }}</h2>
+    <div class="buttons">
+      <mat-icon class="button"
+        ><button (click)="previousMonth()">arrow_back_ios</button></mat-icon
+      >
+      <mat-icon class="button"
+        ><button (click)="nextMonth()">arrow_forward_ios</button></mat-icon
+      >
+    </div>
   </div>
   <table>
     <thead>
@@ -13,11 +20,25 @@
     <tbody>
       <tr *ngFor="let week of weeks">
         <td *ngFor="let day of week" (click)="addTask(day)">
-          <div class="day">
+          <div
+            [ngClass]="{
+              last: day.getMonth() === currentMonth.getMonth() - 1,
+              next: day.getMonth() === currentMonth.getMonth() + 1,
+              day: day.getMonth() === currentMonth.getMonth()
+            }"
+          >
             {{ day.getDate() }}
-            <ul>
-              <li *ngFor="let task of tasks[day.toDateString()]">{{ task }}</li>
-            </ul>
+            <ng-container *ngIf="tasks$ | async; let allTasks">
+              <ul
+                *ngFor="
+                  let task of allTasks
+                    | taskDateFilter: day
+                    | filterCategories: sortCategory
+                "
+              >
+                <li>{{ task.title }}</li>
+              </ul>
+            </ng-container>
           </div>
         </td>
       </tr>

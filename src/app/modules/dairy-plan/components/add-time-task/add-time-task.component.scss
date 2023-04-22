@@ -1,0 +1,39 @@
+input {
+  outline: 0;
+}
+.task-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 10px 10px 17px;
+  position: absolute;
+  width: 361px;
+  height: 53px;
+  left: 600px;
+  top: 431px;
+  background: rgba(53, 53, 53, 0.45);
+  border-radius: 10px;
+}
+
+.task-time-input {
+  width: 361px;
+  height: 53px;
+  background: rgba(53, 53, 53, 0);
+  border: none;
+  border-radius: 10px;
+}
+
+.task-time-input::placeholder {
+  font-family: 'ABeeZee', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  color: #fcfaf2;
+  opacity: 0.5;
+}
+
+.add-timer {
+}

@@ -11,3 +11,35 @@
   left: 304px;
   top: 359px;
 }
+.main-task {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 540px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 170px;
+  gap: 10px;
+  width: 668px;
+  height: 55px;
+  background: #d4a3c4;
+  box-shadow: 5px 5px 10px 2px rgba(30, 30, 30, 0.4);
+  border-radius: 10px;
+  font-family: 'Arial', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 37px;
+  color: #fcfcfc;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  border: none;
+}
+
+.main-task:hover {
+  background-color: #da8bc1;
+  box-shadow: 5px 5px 10px 2px rgb(139, 101, 204);
+}
